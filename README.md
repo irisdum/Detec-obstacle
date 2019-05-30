@@ -13,6 +13,7 @@ Dans le fihier vrep_pioneer_simulation : j'ai défini la fonction get_obstacle q
 La fonction pour le moment retourne la distance de trois capteurs 11,13 et 15 avec un objet (cf sur Vrep le robot). 
 Cette fonction est ensuite utilisée dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
 
+Il reste cependant à refaire le même travail avec les 3 autres capteurs de l'autre côté 
 ## Modification du NN 
 Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeud en sortie
 En entrée N capteurs en sortie : moteur droite et moteur gauche
