@@ -14,3 +14,11 @@ Pour cela j'ai crée une méthode get_obstacle dans le fichier vrep-pionner-simu
 Cette fonction est ensuite utilisé dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
 
 Pour le moment ce qui pose problème c'est la lecture simxReadProximitySensor. Je pense que je n'e l'utilise pas encore bien, je n'arrive pas à obtenir les bonnes informations encore. 
+
+## Modification du NN 
+En entrée N capteurs en sortie : moteur droite et moteur gauche
+Définir la fonction coût
+
+## Test 
+Créer une scène obstacle
+Test et analyse résultat
