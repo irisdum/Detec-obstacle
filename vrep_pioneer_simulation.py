@@ -1,6 +1,7 @@
 import vrep
 import math
 import vrepConst
+import numpy as np
 def to_rad(deg):
     return 2*math.pi*deg/360
 
@@ -30,7 +31,9 @@ class VrepPioneerSimulation:
             res, self.left_motor = vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_leftMotor', vrep.simx_opmode_oneshot_wait)
             res, self.right_motor = vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_rightMotor', vrep.simx_opmode_oneshot_wait)
             res,self.visible=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_visible', vrep.simx_opmode_oneshot_wait)
-            res,self.sensor1=vrep.simxGetObjectHandle(self.visible, 'Pioneer_p3dx_ultrasonicSensor1', vrep.simx_opmode_oneshot_wait)
+            res,self.sensor_15=vrep.simxGetObjectHandle(self.visible, 'Pioneer_p3dx_ultrasonicSensor15', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur , vérifier le op_mode vrep.simx_opmode_blocking
+            res,self.sensor_13=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor13', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur central
+            res,self.sensor_11=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor11', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur 
             self.set_position(self.initial_position)
             vrep.simxStartSimulation(self.client_id, vrep.simx_opmode_oneshot_wait)
            # print('sensor 1',self.sensor1)
@@ -75,10 +78,22 @@ class VrepPioneerSimulation:
         vrep.simxSetJointTargetVelocity(self.client_id, self.right_motor, self.gain*control[1], vrep.simx_opmode_oneshot_wait)
 
     def get_obstacle(self):
-        """ Returns a vector indicating if there are a obstacle detected"""
+        """ Returns a vector indicating if there are a obstacle detected, we have to consider 6 sensors : 3 from a side 3 from the other"""
         #print('je suis dans obstacle')
         # sensor=[0]*16 #the defaut value : nothing detected
         # for i in range(len(2)) : #we have 16 sensors detectors
         #    print(vrep.simHandleProximitySensor(sim_handle_all_except_explicit))
         # print('handle sensor',vrep.simHandleProximitySensor(self.visible))
-        print('test',vrep.simxReadProximitySensor(self.client_id,self.sensor1,vrepConst.simx_opmode_streaming  ))
+        err_code,detectionState,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector=vrep.simxReadProximitySensor(self.client_id,self.sensor_11,vrep.simx_opmode_streaming)
+        err_code13,detectionState13,detectedPoint13,detectedObjectHandle13,detectedSurfaceNormalVector13=vrep.simxReadProximitySensor(self.client_id,self.sensor_13,vrep.simx_opmode_streaming)
+        err_code15,detectionState15,detectedPoint15,detectedObjectHandle15,detectedSurfaceNormalVector15=vrep.simxReadProximitySensor(self.client_id,self.sensor_15,vrep.simx_opmode_streaming)
+        #print('Etat du capteur',err_code,detectionState,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector)
+        dist11=np.linalg.norm(detectedPoint)
+        dist13=np.linalg.norm(detectedPoint13)
+        dist15=np.linalg.norm(detectedPoint15)
+        return dist11,dist13,dist15
+        #print('dist', dist11)
+        
+        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_cent,vrepConst.simx_opmode_streaming ))
+        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_1,vrepConst.simx_opmode_streaming ))
+        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_2,vrepConst.simx_opmode_streaming ))
