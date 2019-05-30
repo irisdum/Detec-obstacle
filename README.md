@@ -8,16 +8,16 @@ Pour linux ./vrep.sh  -q myScene.ttt
 Pour mac : ./vrep.app/Contents/MacOS/vrep  -q ../../../myScene.ttt
 Ensuite pour le connecter avec python : un le fichier run.py
 
-## Lecture des capteurs : 
-utilisation de la fonction simxReadProximitySensor définit dans le fichier vrep.py afin de déterminer l'état d'un capteur
-Pour cela j'ai crée une méthode get_obstacle dans le fichier vrep-pionner-simulation. Cette fonction a pour but de retourner l'état des trois capteurs étudiés. 
-Cette fonction est ensuite utilisé dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
-
-Pour le moment ce qui pose problème c'est la lecture simxReadProximitySensor. Je pense que je n'e l'utilise pas encore bien, je n'arrive pas à obtenir les bonnes informations encore. 
+## Lecture des capteurs : OK
+Dans le fihier vrep_pioneer_simulation : j'ai défini la fonction get_obstacle qui utilise simxReadProximitySensor. Attention pour pouvoir interroger un capteur il faut avoir déclaré l'objet avant avec vrep.simxGetObjectHandle. 
+La fonction pour le moment retourne la distance de trois capteurs 11,13 et 15 avec un objet (cf sur Vrep le robot). 
+Cette fonction est ensuite utilisée dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
 
 ## Modification du NN 
+Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeud en sortie
 En entrée N capteurs en sortie : moteur droite et moteur gauche
-Définir la fonction coût
+Le but est d'éloigner le robot de l'obstacel
+Définir la fonction coût (voir articles)
 
 ## Test 
 Créer une scène obstacle
