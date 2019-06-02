@@ -18,7 +18,7 @@ On a l'état des six capteurs : 1 si il y a en effet un objet détecté, 0 sinon
 Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeuds en sortie.
 J'ai pour l'instant pris le code **online trainer-new**  et je l'ai modifié pour essayer de l'adapter à notre problème. 
 En entrée : Etats des 6 capteurs (0 ou 1). 1 correspond à la présence d'un obstacle
-De ce que j'ai compris on prend l'état de nos capteurs (composé de 0 et de 1). Ensuite on calcule notre effet sur les roues du moteur grâce à notre réseau. On a ainsi un nouvel état des capteurs. Et on compare(fait la différence) cet état avec l'état des capteurs où aucun object est détecté (0,0,0,0,0,0). Cette différence correspod à l'erreur faite par notre réseau.  
+De ce que j'ai compris on prend l'état de nos capteurs (composé de 0 et de 1). Ensuite on calcule notre effet sur les roues du moteur grâce à notre réseau. On a ainsi un nouvel état des capteurs. Et on compare (fait la différence) de cet état avec l'état des capteurs lorsqu'aucun object est détecté (0,0,0,0,0,0). Cette différence correspond à l'erreur faite par notre réseau.  
 
 Cela n'est pas fini, j'ai deux problèmes : 
 - quelle est la forme de la fonction gradient ( il faut l'adapter à notre problème)
@@ -27,5 +27,5 @@ Cela n'est pas fini, j'ai deux problèmes :
 
 
 ## Test 
-Créer une scène obstacle : Fait il s'agit de simu_obstacle.ttt (disponible dans le dépôt)
-Test et analyse résultat
+- Créer une scène obstacle : Fait il s'agit de **simu_obstacle.ttt** (disponible dans le dépôt)
+- Test et analyse résultat
