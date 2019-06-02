@@ -17,8 +17,8 @@ On a l'état des six capteurs : 1 si il y a en effet un objet détecté, 0 sinon
 Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeud en sortie.
 On veut faire en sorte que en entrée on est un vecteur avec des 0 et des 1 indiquant où sont placé les obstacles. Il faut que les commandes des moteurs nous permettent d'accéder à un vecteur ne contenant uniquement que des 0.
 En entrée 6 capteurs <br/>
-En sortie : moteur droite et moteur gauche
-Le but est d'éloigner le robot de l'obstacel
+En sortie : moteur droite et moteur gauche <br/>
+Le but est d'éloigner le robot de l'obstacle
 Définir la fonction coût (voir articles)
 
 ## Test 
