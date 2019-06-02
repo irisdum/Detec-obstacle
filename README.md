@@ -10,7 +10,7 @@ Ensuite pour le connecter avec python : un le fichier run.py
 
 
 ## Lecture des capteurs : OK
-Dans le fihier vrep_pioneer_simulation : j'ai défini la fonction get_obstacle qui utilise simxReadProximitySensor. Attention pour pouvoir interroger un capteur il faut avoir déclaré l'objet avant avec vrep.simxGetObjectHandle. 
+Dans le fihier vrep_pioneer_simulation : j'ai défini la fonction **get_obstacle** qui utilise simxReadProximitySensor. Attention pour pouvoir interroger un capteur il faut avoir déclaré l'objet avant avec vrep.simxGetObjectHandle. 
 La fonction pour le moment retourne la distance de trois capteurs 11,13 et 15 avec un objet (cf sur Vrep le robot). 
 Cette fonction est ensuite utilisée dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
 On a l'état des six capteurs : 1 si il y a en effet un objet détecté, 0 sinon.  
