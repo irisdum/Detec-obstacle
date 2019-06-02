@@ -14,7 +14,12 @@ La fonction pour le moment retourne la distance de trois capteurs 11,13 et 15 av
 Cette fonction est ensuite utilisée dans le fichier online-trainer dans la méthode train associé à Online Trainer. L'idée est d'avoir à chaque coup de l'aprentissage l'état de ces capteurs. 
 On a l'état des six capteurs : 1 si il y a en effet un objet détecté, 0 sinon.  
 ## Modification du NN 
-Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeud en sortie.
+Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeuds en sortie.
+J'ai pour l'instant pris le code **online trainer-new**  et je l'ai modifié pour essayer de l'adapter à notre problème. 
+Cela n'est pas fini, j'ai deux problèmes : 
+- quel est la forme de la fonction gradient ( il faut l'adapter à notre problème)
+- quel sont les outputs du réseau (voir fichier **vrep_pioneer_simulation** dans l'init) 
+<br/>
 On veut faire en sorte que en entrée on est un vecteur avec des 0 et des 1 indiquant où sont placé les obstacles. Il faut que les commandes des moteurs nous permettent d'accéder à un vecteur ne contenant uniquement que des 0.
 En entrée 6 capteurs <br/>
 En sortie : moteur droite et moteur gauche <br/>
