@@ -4,7 +4,7 @@ Le projet est en cours le code n'est pas terminé !
 Ce code s'est inspiré de : https://github.com/sfosset/mines_olp
 
 Pour lancer vrep depuis le terminal : 
-Pour linux ./vrep.sh  -q myScene.ttt
+Pour linux ./vrep.sh  -q myScene.ttt <br/>
 Pour mac : ./vrep.app/Contents/MacOS/vrep  -q ../../../myScene.ttt
 Ensuite pour le connecter avec python : un le fichier run.py
 
