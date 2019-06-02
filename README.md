@@ -4,9 +4,10 @@ Le projet est en cours le code n'est pas terminé !
 Ce code s'est inspiré de : https://github.com/sfosset/mines_olp
 
 Pour lancer vrep depuis le terminal : 
-Pour linux ./vrep.sh  -q myScene.ttt <br/>
-Pour mac : ./vrep.app/Contents/MacOS/vrep  -q ../../../myScene.ttt
+Pour linux ./vrep.sh  -q simu_obstacle.ttt <br/>
+Pour mac : ./vrep.app/Contents/MacOS/vrep  -q simu_obstacle.ttt 
 Ensuite pour le connecter avec python : un le fichier run.py
+
 
 ## Lecture des capteurs : OK
 Dans le fihier vrep_pioneer_simulation : j'ai défini la fonction get_obstacle qui utilise simxReadProximitySensor. Attention pour pouvoir interroger un capteur il faut avoir déclaré l'objet avant avec vrep.simxGetObjectHandle. 
@@ -16,16 +17,15 @@ On a l'état des six capteurs : 1 si il y a en effet un objet détecté, 0 sinon
 ## Modification du NN 
 Il faut je pense bien modifier le réseau de neurones avec 6 noeuds en entrée et deux noeuds en sortie.
 J'ai pour l'instant pris le code **online trainer-new**  et je l'ai modifié pour essayer de l'adapter à notre problème. 
+En entrée : Etats des 6 capteurs (0 ou 1). 1 correspond à la présence d'un obstacle
+De ce que j'ai compris on prend l'état de nos capteurs (composé de 0 et de 1). Ensuite on calcule notre effet sur les roues du moteur grâce à notre réseau. On a ainsi un nouvel état des capteurs. Et on compare(fait la différence) cet état avec l'état des capteurs où aucun object est détecté (0,0,0,0,0,0). Cette différence correspod à l'erreur faite par notre réseau.  
+
 Cela n'est pas fini, j'ai deux problèmes : 
-- quel est la forme de la fonction gradient ( il faut l'adapter à notre problème)
-- quel sont les outputs du réseau (voir fichier **vrep_pioneer_simulation** dans l'init) 
+- quelle est la forme de la fonction gradient ( il faut l'adapter à notre problème)
+- quels sont les outputs du réseau (voir fichier **vrep_pioneer_simulation** dans l'init), comprendre à quoi il correspondent 
 <br/>
-On veut faire en sorte que en entrée on est un vecteur avec des 0 et des 1 indiquant où sont placé les obstacles. Il faut que les commandes des moteurs nous permettent d'accéder à un vecteur ne contenant uniquement que des 0.
-En entrée 6 capteurs <br/>
-En sortie : moteur droite et moteur gauche <br/>
-Le but est d'éloigner le robot de l'obstacle
-Définir la fonction coût (voir articles)
+
 
 ## Test 
-Créer une scène obstacle
+Créer une scène obstacle : Fait il s'agit de simu_obstacle.ttt (disponible dans le dépôt)
 Test et analyse résultat
