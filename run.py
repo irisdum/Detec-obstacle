@@ -1,10 +1,10 @@
-
+# coding: utf-8
 
 from BackProp_Python_v2 import NN
 from vrep_pioneer_simulation import VrepPioneerSimulation
 from rdn import Pioneer # rdn pour ROS avec le pioneer
 #import rospy
-from online_trainer import OnlineTrainer
+from online_trainer_obst_v1 import OnlineTrainer
 import json
 import threading
 
@@ -13,7 +13,7 @@ robot = VrepPioneerSimulation()
 #robot = Pioneer(rospy)
 # HL_size= 10# nbre neurons of Hiden layer
 HL_size=5
-network = NN(3, HL_size, 2)
+network = NN(6, HL_size, 2)
 
 choice = input('Do you want to load previous network? (y/n) --> ')
 if choice == 'y':
