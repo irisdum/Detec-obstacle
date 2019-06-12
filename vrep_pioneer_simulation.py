@@ -104,6 +104,8 @@ class VrepPioneerSimulation:
         dist8=is_obstacle(np.linalg.norm(detectedPoint8))
         dist5=is_obstacle(np.linalg.norm(detectedPoint5))
         dist1=is_obstacle(np.linalg.norm(detectedPoint1))
+        # les detectionstates sont des booléens    #print(type(detectionState))
+
         return detectionState,detectionState8,detectionState5,detectionState1,detectionState13,detectionState16
         #print('dist', dist11)
 

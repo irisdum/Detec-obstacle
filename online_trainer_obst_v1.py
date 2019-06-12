@@ -34,7 +34,7 @@ class OnlineTrainer:
         network_input[4]=dist1
         #Teta_t = 0
         print('run',self.running)
-
+        position = self.robot.get_position()
 
         while self.running:
             debut = time.time()
@@ -47,7 +47,7 @@ class OnlineTrainer:
             network_input[2] = dist16
             network_input[3]=dist8
             network_input[4]=dist5
-            network_input[4]=dist1
+            network_input[5]=dist1
 
             if self.training:
                 delta_t = (time.time()-debut)
@@ -67,4 +67,4 @@ class OnlineTrainer:
                 self.network.backPropagate(grad, 0.05, 0)
 
         self.robot.set_motor_velocity([0,0])
-self.running = False
+        self.running = False
