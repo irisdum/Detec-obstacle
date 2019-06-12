@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import vrep
 import math
 import vrepConst
@@ -34,10 +36,10 @@ class VrepPioneerSimulation:
             #Les capteurs d'obstacle 16,13, 9 et 8,5, 1
             res,self.sensor_16=vrep.simxGetObjectHandle(self.visible, 'Pioneer_p3dx_ultrasonicSensor16', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur , vérifier le op_mode vrep.simx_opmode_blocking
             res,self.sensor_13=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor13', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur central
-            res,self.sensor_9=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor9', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur 
-            res,self.sensor_8=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor8', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur 
-            res,self.sensor_5=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor5', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur 
-            res,self.sensor_1=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor1', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur 
+            res,self.sensor_9=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor9', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur
+            res,self.sensor_8=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor8', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur
+            res,self.sensor_5=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor5', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur
+            res,self.sensor_1=vrep.simxGetObjectHandle(self.client_id, 'Pioneer_p3dx_ultrasonicSensor1', vrep.simx_opmode_oneshot_wait) #il s'agit du capteur
             self.set_position(self.initial_position)
             vrep.simxStartSimulation(self.client_id, vrep.simx_opmode_oneshot_wait)
            # print('sensor 1',self.sensor1)
@@ -104,13 +106,13 @@ class VrepPioneerSimulation:
         dist1=is_obstacle(np.linalg.norm(detectedPoint1))
         return detectionState,detectionState8,detectionState5,detectionState1,detectionState13,detectionState16
         #print('dist', dist11)
-       
+
 def is_obstacle(dist):
     """ Knowing the distance between the orbot and the next obstacle consider if there is an obstacle or not"""
-    if dist>0.5 : 
+    if dist>0.5 :
         return 0
-    else : 
-        return 1 
+    else :
+        return 1
         # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_cent,vrepConst.simx_opmode_streaming ))
         # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_1,vrepConst.simx_opmode_streaming ))
         # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_2,vrepConst.simx_opmode_streaming ))
