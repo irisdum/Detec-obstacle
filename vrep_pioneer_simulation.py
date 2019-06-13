@@ -109,6 +109,10 @@ class VrepPioneerSimulation:
         list_dist=[dist9,dist13,dist16,dist8,dist5,dist1]
         list_state=[detectionState,detectionState13,detectionState16,detectionState8,detectionState5,detectionState1]
         return list_ind,list_dist,list_state 
+
+        # les detectionstates sont des booléens    #print(type(detectionState))
+
+
         #print('dist', dist11)
 
 def is_obstacle(dist):
