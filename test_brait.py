@@ -6,24 +6,23 @@ class Obstacle_test:
         Args:
             robot (Robot): a robot instance following the pattern of
                 VrepPioneerSimulation
-            target (list): the target position [x,y,theta]
         """
         self.robot = robot
 
-        self.alpha = [1/6,1/6,1/(math.pi)]  # normalition avec limite du monde cartesien = -3m � + 3m
+        self.alpha = [1/6,1/6,1/(math.pi)]  # normalisation avec limite du monde cartesien = -3m + 3m
 
     def avoid_obst(self):
 
-        noDetectionDist=0.35
-        maxDetectionDist=0.15
-        
-        detect=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] #why are all the values zero, what does this do?
-        braitenbergL=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8, 0,0,0,0,0,0,0,0] # why are the values like this, how is it calculated
+        noDetectionDist=0.35 #distance a partir de laquelle l'obstacle est pris en compte
+        maxDetectionDist=0.15 #distance max a laquelle s'approcher
+
+        detect=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        braitenbergL=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8, 0,0,0,0,0,0,0,0] #parametres de braitenberg pour la roue gauche
         braitenbergL=[-2*elem for elem in braitenbergL]
-        braitenbergR=[0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1, 0,0,0,0,0,0,0,0]
+        braitenbergR=[0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1, 0,0,0,0,0,0,0,0] #parametres de braitenberg pour la roue droite
         braitenbergR=[-2*elem for elem in braitenbergR]
-        #print(braitenbergR)
-        v0=2# what is v0 and why is it set to 2, does it mean a velocity of 2m/s or something
+
+        v0=2
 
         list_ind,list_dist,list_state=self.robot.get_obstacle()
 
@@ -34,12 +33,12 @@ class Obstacle_test:
                 if (dist<maxDetectionDist) :
                     dist=maxDetectionDist
                 detect[list_ind[i]]=1-((dist-maxDetectionDist)/(noDetectionDist-maxDetectionDist))
-    #   simHandleChildScript(sim_handle_all_except_explicit)
+
 
         vLeft=v0
         vRight=v0
 
-        for i in range(0,16):
+        for i in range(0,16): #changement des vitesses
             vLeft=vLeft+braitenbergL[i]*detect[i]
             vRight=vRight+braitenbergR[i]*detect[i]
 
