@@ -23,8 +23,8 @@ class OnlineTrainer:
 
     def train(self, target):
         position = self.robot.get_position()
-        dist11,dist13,dist15=self.robot.get_obstacle() # On determine ici si le robot a rencontré un obstacle
-        print(dist11,dist13,dist15)
+        dist9,dist13,dist16,dist8,dist5,dist1=self.robot.get_obstacle() # On determine ici si le robot a rencontré un obstacle
+        print(dist9,dist13,dist16,dist8,dist5,dist1)
         network_input = [0, 0, 0]
         network_input[0] = (position[0]-target[0])*self.alpha[0]
         network_input[1] = (position[1]-target[1])*self.alpha[1]
