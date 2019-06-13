@@ -1,5 +1,5 @@
 import math
-
+import time
 class Obstacle_test:
     def __init__(self, robot):
         """
@@ -14,13 +14,16 @@ class Obstacle_test:
 
     def avoid_obst(self):
 
-        noDetectionDist=0.1
-        maxDetectionDist=0.04
+        noDetectionDist=0.35
+        maxDetectionDist=0.15
+        
         detect=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] #why are all the values zero, what does this do?
         braitenbergL=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8, 0,0,0,0,0,0,0,0] # why are the values like this, how is it calculated
+        braitenbergL=[-2*elem for elem in braitenbergL]
         braitenbergR=[0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1, 0,0,0,0,0,0,0,0]
-
-        v0=1 # what is v0 and why is it set to 2, does it mean a velocity of 2m/s or something
+        braitenbergR=[-2*elem for elem in braitenbergR]
+        #print(braitenbergR)
+        v0=2# what is v0 and why is it set to 2, does it mean a velocity of 2m/s or something
 
         list_ind,list_dist,list_state=self.robot.get_obstacle()
 
@@ -46,3 +49,4 @@ class Obstacle_test:
     def moove(self,iter):
         for i in range(iter):
             self.avoid_obst()
+            time.sleep(0.050)
