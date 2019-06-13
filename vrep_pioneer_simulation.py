@@ -15,7 +15,7 @@ class VrepPioneerSimulation:
 
         self.ip = '127.0.0.1'
         self.port = 19997
-        self.scene = './simu_obstacle4.ttt'
+        self.scene = './simu_fleurs.ttt'
         self.gain = 2
         self.initial_position = [3,3,to_rad(45)]
 
@@ -86,12 +86,8 @@ class VrepPioneerSimulation:
         vrep.simxSetJointTargetVelocity(self.client_id, self.right_motor, self.gain*control[1], vrep.simx_opmode_oneshot_wait)
 
     def get_obstacle(self):
-        """ Returns a vector indicating if there are a obstacle detected, we have to consider 6 sensors : 3 from a side 3 from the other"""
-        #print('je suis dans obstacle')
-        # sensor=[0]*16 #the defaut value : nothing detected
-        # for i in range(len(2)) : #we have 16 sensors detectors
-        #    print(vrep.simHandleProximitySensor(sim_handle_all_except_explicit))
-        # print('handle sensor',vrep.simHandleProximitySensor(self.visible))
+        """ Returns a vector indicating if there are a obstacle detected, we have to consider 8 sensors """
+      
         err_code1,detectionState1,detectedPoint1,detectedObjectHandle1,detectedSurfaceNormalVector1=vrep.simxReadProximitySensor(self.client_id,self.sensor_1,vrep.simx_opmode_streaming)
         err_code2,detectionState2,detectedPoint2,detectedObjectHandle2,detectedSurfaceNormalVector2=vrep.simxReadProximitySensor(self.client_id,self.sensor_2,vrep.simx_opmode_streaming)
         err_code3,detectionState3,detectedPoint3,detectedObjectHandle3,detectedSurfaceNormalVector3=vrep.simxReadProximitySensor(self.client_id,self.sensor_3,vrep.simx_opmode_streaming)
@@ -102,31 +98,21 @@ class VrepPioneerSimulation:
         err_code8,detectionState8,detectedPoint8,detectedObjectHandle8,detectedSurfaceNormalVector8=vrep.simxReadProximitySensor(self.client_id,self.sensor_8,vrep.simx_opmode_streaming)
         #print('Etat du capteur',err_code,detectionState,detectedPoint,detectedObjectHandle,detectedSurfaceNormalVector)
         #print(detectionState,detectionState8,detectionState5,detectionState1,detectionState13,detectionState16)
-        dist1=is_obstacle(np.linalg.norm(detectedPoint1))
-        dist2=is_obstacle(np.linalg.norm(detectedPoint2))
-        dist3=is_obstacle(np.linalg.norm(detectedPoint3))
-        dist4=is_obstacle(np.linalg.norm(detectedPoint4))
-        dist5=is_obstacle(np.linalg.norm(detectedPoint5))
-        dist6=is_obstacle(np.linalg.norm(detectedPoint6))
-        dist7=is_obstacle(np.linalg.norm(detectedPoint7))
-        dist8=is_obstacle(np.linalg.norm(detectedPoint8))
+        dist1=np.linalg.norm(detectedPoint1)
+        dist2=np.linalg.norm(detectedPoint2)
+        dist3=np.linalg.norm(detectedPoint3)
+        dist4=np.linalg.norm(detectedPoint4)
+        dist5=np.linalg.norm(detectedPoint5)
+        dist6=np.linalg.norm(detectedPoint6)
+        dist7=np.linalg.norm(detectedPoint7)
+        dist8=np.linalg.norm(detectedPoint8)
 
         list_ind=[1,2,3,4,5,6,7,8]
         list_dist=[dist1,dist2,dist3,dist4,dist5,dist6,dist7,dist8]
         list_state=[detectionState1,detectionState2,detectionState3,detectionState4,detectionState5,detectionState6,detectionState7,detectionState8]
         return list_ind,list_dist,list_state
 
-        # les detectionstates sont des booléens    #print(type(detectionState))
+    
 
 
-        #print('dist', dist11)
-
-def is_obstacle(dist):
-    """ Knowing the distance between the orbot and the next obstacle consider if there is an obstacle or not"""
-    if dist>0.5 :
-        return 0
-    else :
-        return 1
-        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_cent,vrepConst.simx_opmode_streaming ))
-        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_1,vrepConst.simx_opmode_streaming ))
-        # print('Etat capteur',vrep.simxReadProximitySensor(self.client_id,self.sensor_2,vrepConst.simx_opmode_streaming ))
+       
