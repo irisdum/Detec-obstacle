@@ -34,7 +34,7 @@ class OnlineTrainer:
         network_input[2] = dist16
         network_input[3]=dist8
         network_input[4]=dist5
-        network_input[4]=dist1
+        network_input[5]=dist1
         #Teta_t = 0
         print('run',self.running)
         
@@ -42,7 +42,7 @@ class OnlineTrainer:
             debut = time.time()
             command = self.network.runNN(network_input) # propage erreur et calcul vitesses roues instant t, voir si il y a bien deux arguments
             print('obstacle',self.robot.get_obstacle())
-            alpha=1
+            alpha=1/6
             alpha_x = 1/6 
             alpha_y = 1/6
             alpha_teta = 1.0/(math.pi)
@@ -64,13 +64,13 @@ class OnlineTrainer:
             network_input[2] = dist16
             network_input[3]=dist8
             network_input[4]=dist5
-            network_input[4]=dist1 
+            network_input[5]=dist1 
             
             crit_ap= alpha*dist9**2+alpha*dist13**2+alpha*dist16**2+alpha*dist8**2+alpha*dist5**2+alpha*dist1**2 #apr�s commande, pareil j'aifait un peu au pf j'ai repris le ce qui avait été fait. 
 
             if self.training:#on est dans période d'entrainement
                 delta_t = (time.time()-debut)
-
+                grad=[()-2/delta_t]
                 grad = [
                     (-2/delta_t)*(alpha_x*alpha_x*(position[0]-target[0])*delta_t*self.robot.r*math.cos(position[2])
                     +alpha_y*alpha_y*(position[1]-target[1])*delta_t*self.robot.r*math.sin(position[2])
