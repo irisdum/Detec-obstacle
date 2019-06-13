@@ -3,8 +3,8 @@
 import json
 import threading
 import sys, os
-sys.path.append('/Users/iris/Desktop/APP-EL_Pioneer-VREP-fonctionneTB')
-from rdn2 import Pioneer # rdn pour ROS avec le pioneer
+sys.path.append('~/Desktop/Projets en cours/Robotique_projet/Detec-obstacle')#/Users/iris/Desktop/APP-EL_Pioneer-VREP-fonctionneTB')
+from rdn import Pioneer # rdn pour ROS avec le pioneer
 from vrep_pioneer_simulation import VrepPioneerSimulation
 from test_brait import*
 robot = VrepPioneerSimulation()
@@ -22,7 +22,7 @@ if choice == 'y':
     trainer.training = True
 elif choice == 'n':
     trainer.training = False
-    
+
 continue_running = True
 
 while(continue_running):
